@@ -1,20 +1,21 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "target": "es2018",
     "lib": [
       "es6",
       "dom"
     ],
     "module": "commonjs",
-    "rootDir": "src",
+    "rootDir": "./src",
     "resolveJsonModule": true,
     "allowJs": true,
-    "outDir": "build",
+    "outDir": "./build",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
