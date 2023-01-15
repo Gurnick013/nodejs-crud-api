@@ -60,7 +60,6 @@ export class Balancer {
         } else {
             this.workCount += 1
         }
-
         return currentId
     }
 
@@ -70,11 +69,8 @@ export class Balancer {
             req.on('data', (chunk) => {
                 body += chunk
             })
-
             req.on('end', () => {
-
                 const currentId = this.switchWorker()
-
                 const request = http.request({
                     host: 'localhost',
                     port: +port + currentId,
@@ -84,7 +80,6 @@ export class Balancer {
                         'balancer': 'true'
                     }
                 })
-
                 request.on('error', () => {
                     res.writeHead(500)
                     res.end('Error Connect')

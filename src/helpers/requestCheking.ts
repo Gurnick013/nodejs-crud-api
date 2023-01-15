@@ -16,14 +16,12 @@ const checkField = (error: string[], user: Record<string, string>) => {
         if (fields.includes(item)) res += 1
         else noValidField.push(item)
     }
-
     if (noValidField.length > 0) error.push(`this fields is no valid: ${noValidField.join(', ')}`)
     if (res < 1) error.push(`there are no valid values`)
 }
 
 const checkHobbies = (error: string[], user: Record<string, string>) => {
     if (!user.hobbies) { error.push('the hobbies field is missing') }
-
     if (user.hobbies) {
         if (!Array.isArray(user.hobbies)) {
             error.push('the hobbies field is not valid')
@@ -45,7 +43,6 @@ export const checkCreate = (user: Record<string, string>) => {
     checkAge(error, user)
     checkHobbies(error, user)
     checkField(error, user)
-
     return Array.from(new Set(error))
 }
 
@@ -55,6 +52,5 @@ export const checkUpdate = (user: Record<string, string>) => {
     if (user.age) checkAge(error, user)
     if (user.hobbies) checkHobbies(error, user)
     checkField(error, user)
-
     return Array.from(new Set(error))
 }

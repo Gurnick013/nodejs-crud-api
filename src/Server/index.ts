@@ -1,10 +1,10 @@
-import http from 'http'
+import http from 'http';
+import EventEmitter from 'events';
+import cluster from "cluster";
 import { UserService } from '../service';
 import { HttpCode, METHOD, ResType } from '../helpers/statusCodes';
 import { IUser } from '../Interface/user';
 import { MessageErr } from "../helpers/errorMessages";
-import EventEmitter from 'events'
-import cluster from "cluster";
 
 export class Server {
     db: IUser[];
@@ -22,7 +22,7 @@ export class Server {
     }
 
     setEndpoints() {
-        this.emitter.on(this.path(METHOD.GET), this.userService.getUser.bind(this))
+        this.emitter.on(this.path(METHOD.GET), this.userService.getUserById.bind(this))
         this.emitter.on(this.path(METHOD.POST), this.userService.createUser.bind(this))
         this.emitter.on(this.path(METHOD.PUT), this.userService.updateUser.bind(this))
         this.emitter.on(this.path(METHOD.DELETE), this.userService.removeUser.bind(this))
@@ -49,7 +49,6 @@ export class Server {
 
     emit(req: http.IncomingMessage, res: http.ServerResponse, root: string, path: string, parameter: string) {
         const emit = this.emitter.emit(this.path(req.method!, root, path), req, res, parameter, this.db, this.sendDB)
-
         if (!emit) {
             (res as ResType).send(HttpCode.NotFound, MessageErr.urlExists)
         }
@@ -62,9 +61,7 @@ export class Server {
                     res.writeHead(code)
                     res.end(JSON.stringify(data))
                 }
-
                 const [root = '', path = '', parameter, error] = req.url!.split('/').slice(1)
-
                 if (error) {
                     (res as ResType).send(HttpCode.NotFound, MessageErr.urlExists)
                 } else {
