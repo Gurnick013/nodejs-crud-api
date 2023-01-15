@@ -1,5 +1,5 @@
-import request from 'supertest'
-import { Server } from '../src/Server'
+import request from 'supertest';
+import { Server } from '../src/Server';
 import { IUser } from "../src/Interface/user";
 import { testData, testDataForUpdating } from "../src/helpers/testData";
 

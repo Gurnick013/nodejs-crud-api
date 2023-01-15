@@ -1,13 +1,12 @@
-import request from 'supertest'
-import { Server } from '../src/Server'
-import { IUser } from '../src/Interface/user'
-import { MessageErr } from '../src/helpers/errorMessages'
+import request from 'supertest';
+import { Server } from '../src/Server';
+import { IUser } from '../src/Interface/user';
+import { MessageErr } from '../src/helpers/errorMessages';
 
 const app = new Server()
 
 describe('Server Error', () => {
     const response = request(app.server)
-
     it('GET / invalid user id', async () => {
         const res = await response.get('/api/users/gg')
             .set('Accept', 'application/json')

@@ -4,3 +4,10 @@ export interface IUser {
     age: number
     hobbies: string[]
 }
+
+export interface IUserTest {
+    username: string
+    hobbies: string[]
+    age: number
+    id?: string
+}

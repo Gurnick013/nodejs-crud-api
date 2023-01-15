@@ -24,7 +24,6 @@ export class UserService {
     } catch(e) {
       res.send(HttpCode.ErrorServer, "Server Error")
     }
-
   }
 
   createUser(req: ReqType, res: ResType, parameter: string, db: IUser[], send: (db: IUser[]) => void) {
